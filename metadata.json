@@ -1,0 +1,6 @@
+{
+  "name": "SayIt",
+  "description": "A tranquil, ephemeral space to write or record your thoughts and let them go.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
