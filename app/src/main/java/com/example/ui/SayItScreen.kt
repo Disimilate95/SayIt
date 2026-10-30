@@ -335,20 +335,22 @@ fun SayItScreen(
                                     .alpha(bubbleAlpha),
                                 horizontalAlignment = Alignment.End
                             ) {
-                                // Real Messenger Message Bubble (outgoing, bottom-right tail)
+                                // Real Messenger Message Bubble (outgoing, clean single-layer design)
                                 val outgoingBubbleShape = RoundedCornerShape(
-                                    topStart = 20.dp,
-                                    topEnd = 20.dp,
-                                    bottomStart = 20.dp,
+                                    topStart = 18.dp,
+                                    topEnd = 18.dp,
+                                    bottomStart = 18.dp,
                                     bottomEnd = 4.dp
                                 )
 
-                                Surface(
-                                    shape = outgoingBubbleShape,
-                                    color = Color.Transparent,
-                                    shadowElevation = 12.dp,
+                                Box(
                                     modifier = Modifier
-                                        .widthIn(min = 140.dp, max = 330.dp)
+                                        .shadow(
+                                            elevation = 6.dp,
+                                            shape = outgoingBubbleShape,
+                                            ambientColor = Color(0x33000000),
+                                            spotColor = Color(0x33000000)
+                                        )
                                         .clip(outgoingBubbleShape)
                                         .background(
                                             brush = Brush.horizontalGradient(customColors.bubbleGradient)
@@ -356,18 +358,19 @@ fun SayItScreen(
                                         .border(
                                             width = 1.dp,
                                             brush = Brush.verticalGradient(
-                                                listOf(Color(0x60FFFFFF), Color(0x18FFFFFF))
+                                                listOf(Color(0x55FFFFFF), Color(0x18FFFFFF))
                                             ),
                                             shape = outgoingBubbleShape
                                         )
+                                        .widthIn(min = 130.dp, max = 320.dp)
                                         .testTag("thought_bubble_card")
                                 ) {
                                     Column(
                                         modifier = Modifier.padding(
-                                            start = 14.dp,
-                                            end = 14.dp,
+                                            start = 13.dp,
+                                            end = 13.dp,
                                             top = 9.dp,
-                                            bottom = 8.dp
+                                            bottom = 7.dp
                                         )
                                     ) {
                                         // Header inside bubble: Recipient indication badge
@@ -375,15 +378,15 @@ fun SayItScreen(
                                             verticalAlignment = Alignment.CenterVertically,
                                             horizontalArrangement = Arrangement.spacedBy(5.dp),
                                             modifier = Modifier
-                                                .padding(bottom = 6.dp)
-                                                .clip(RoundedCornerShape(10.dp))
+                                                .padding(bottom = 5.dp)
+                                                .clip(RoundedCornerShape(8.dp))
                                                 .background(Color(0x28FFFFFF))
-                                                .padding(horizontal = 7.dp, vertical = 2.dp)
+                                                .padding(horizontal = 7.dp, vertical = 2.5.dp)
                                         ) {
                                             Icon(
                                                 imageVector = Icons.Default.Lock,
                                                 contentDescription = null,
-                                                tint = Color.White.copy(alpha = 0.9f),
+                                                tint = Color.White.copy(alpha = 0.95f),
                                                 modifier = Modifier.size(11.dp)
                                             )
                                             Text(
@@ -435,24 +438,24 @@ fun SayItScreen(
                                                 Text(
                                                     text = "• Голосовое",
                                                     style = MaterialTheme.typography.bodySmall.copy(
-                                                        color = Color.White.copy(alpha = 0.75f),
+                                                        color = Color.White.copy(alpha = 0.85f),
                                                         fontSize = 11.5.sp
                                                     )
                                                 )
                                             }
                                         }
 
-                                        // If text was sent: crisp message typography
+                                        // If text was sent: crisp message typography seamlessly blended
                                         state.sentText?.let { textMsg ->
                                             Text(
                                                 text = textMsg,
                                                 style = MaterialTheme.typography.bodyLarge.copy(
-                                                    color = customColors.bubbleTextColor,
-                                                    fontSize = 15.5.sp,
-                                                    lineHeight = 22.sp,
+                                                    color = Color.White,
+                                                    fontSize = 15.sp,
+                                                    lineHeight = 21.sp,
                                                     fontWeight = FontWeight.Normal
                                                 ),
-                                                modifier = Modifier.padding(top = 2.dp)
+                                                modifier = Modifier.padding(top = 1.dp)
                                             )
                                         }
 
@@ -460,21 +463,21 @@ fun SayItScreen(
                                         Row(
                                             modifier = Modifier
                                                 .align(Alignment.End)
-                                                .padding(top = 6.dp),
+                                                .padding(top = 4.dp),
                                             verticalAlignment = Alignment.CenterVertically,
                                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                                         ) {
                                             Text(
                                                 text = state.sentTime,
                                                 style = MaterialTheme.typography.labelSmall.copy(
-                                                    color = customColors.bubbleTimestampColor,
+                                                    color = Color.White.copy(alpha = 0.80f),
                                                     fontSize = 10.5.sp
                                                 )
                                             )
                                             Icon(
                                                 imageVector = Icons.Default.DoneAll,
                                                 contentDescription = null,
-                                                tint = customColors.bubbleTimestampColor,
+                                                tint = Color.White.copy(alpha = 0.85f),
                                                 modifier = Modifier.size(13.dp)
                                             )
                                         }
